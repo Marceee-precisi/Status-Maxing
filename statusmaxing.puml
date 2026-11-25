@@ -1,0 +1,33 @@
+@startuml
+skinparam classAttributeIconSize 0
+class User {
+  - name: String
+  - age: int
+  - gender: String
+  - weightLbs: double
+  - heightInches: double
+  + calculateBMI(): double
+}
+class FinancialProfile {
+  - monthlyIncome: double
+  - savings: double
+  - totalDebt: double
+  + calculateNetWorth(): double
+  + evaluateFinancialStanding(): String
+  + canAffordMilestone(cost: double): boolean
+}
+class GoalItem {
+  - goalName: String
+  - targetCost: double
+  - targetTimelineMonths: int
+  + GoalItem(goalName: String, targetCost: double, targetTimelineMonths: int)
+}
+class ScoreCalculator {
+  + computeStatusScore(user: User, fin: FinancialProfile): int
+  + calculateGoalProbability(fin: FinancialProfile, goal: GoalItem, monthlySavingsRate: double): double
+}
+User "1" --> "1" FinancialProfile : has-a
+ScoreCalculator ..> User : evaluates
+ScoreCalculator ..> FinancialProfile : evaluates
+ScoreCalculator ..> GoalItem : evaluates
+@enduml
